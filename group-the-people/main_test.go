@@ -16,11 +16,11 @@ func Test_groupThePeople(t *testing.T) {
 	}{
 		{
 			"first tests...",
-			args{[]int{2,1,3,3,3,2}},
+			args{[]int{2, 1, 3, 3, 3, 2}},
 			[][]int{
-				[]int{1},		// 0
-				[]int{0,5},		// 1
-				[]int{2,3,4},	// 2
+				[]int{2, 3, 4},
+				[]int{0, 5},
+				[]int{1},
 			},
 		},
 	}
