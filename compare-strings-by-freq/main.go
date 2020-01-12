@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
 )
 
 func smallestFreq(s string) int {
@@ -34,17 +35,35 @@ func numSmallerByFrequency(queries []string, words []string) []int {
 	for _, w := range words {
 		wFreq = append(wFreq, smallestFreq(w))
 	}
+	sort.Ints(wFreq)
 
 	for i, qf := range qFreq {
 		// to make this faster, we could use binary search
-		for _, wf := range wFreq {
-			if qf < wf {
-				result[i]++
-			}
-		}
+		result[i] = binarySearch(qf, wFreq)
+		// for _, wf := range wFreq {
+		// 	if qf < wf {
+		// 		result[i]++
+		// 	}
+		// }
 	}
 
 	return result
+}
+
+func binarySearch(num int, wFreq []int) int {
+	l := 0
+	r := len(wFreq) - 1
+	for l <= r {
+		m := (r + l) / 2
+
+		if wFreq[m] <= num {
+			l = m + 1
+		} else {
+			r = m - 1
+		}
+	}
+
+	return len(wFreq) - l
 }
 
 func main() {
