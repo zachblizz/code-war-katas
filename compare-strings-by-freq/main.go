@@ -51,19 +51,20 @@ func numSmallerByFrequency(queries []string, words []string) []int {
 }
 
 func binarySearch(num int, wFreq []int) int {
-	l := 0
-	r := len(wFreq) - 1
-	for l <= r {
-		m := (r + l) / 2
+	start := 0
+	end := len(wFreq) - 1
 
-		if wFreq[m] <= num {
-			l = m + 1
+	for start <= end {
+		mid := (start + end) / 2
+
+		if wFreq[mid] <= num {
+			start = mid + 1
 		} else {
-			r = m - 1
+			end = mid - 1
 		}
 	}
 
-	return len(wFreq) - l
+	return len(wFreq) - start
 }
 
 func main() {
