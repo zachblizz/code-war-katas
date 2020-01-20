@@ -2,20 +2,19 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"sort"
 )
 
 func smallestFreq(s string) int {
-	sChar := math.MaxInt64
-	cMap := make(map[int]int)
+	sChar := 'z'
+	cMap := make(map[rune]int)
 
 	for _, c := range s {
-		if sChar > int(c) {
-			sChar = int(c)
+		if sChar > c {
+			sChar = c
 		}
 
-		cMap[int(c)]++
+		cMap[c]++
 	}
 
 	return cMap[sChar]
