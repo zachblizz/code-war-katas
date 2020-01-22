@@ -90,7 +90,7 @@ func _reverseBetween3(head *ListNode, stack []*ListNode, start, end int) {
 	_reverseBetween3(head, stack, start+1, end-1)
 }
 
-func _reverseBetweenMine(stack []*ListNode) {
+func solution(stack []*ListNode) {
 	s, e := 0, len(stack)-1
 
 	for ; s < e; s++ {
@@ -121,7 +121,8 @@ func reverseBetween(head *ListNode, m, n int) *ListNode {
 		idx++
 	}
 
-	_reverseBetweenMine(stack)
+	// it's memeory intesive, but it works...
+	solution(stack)
 
 	return head
 }
@@ -131,7 +132,8 @@ func reverseBetween(head *ListNode, m, n int) *ListNode {
 // 	stop bool
 // )
 
-// // it's position not value.......
+// it's position not value.......
+// backtracking example
 // func reverseBetween(head *ListNode, m, n int) *ListNode {
 // 	r := &ListNode{head.Val, head.Next}
 // 	l = &ListNode{head.Val, head.Next}
@@ -162,7 +164,7 @@ func reverseBetween(head *ListNode, m, n int) *ListNode {
 // 		tmp := l.Val
 // 		l.Val = r.Val
 // 		r.Val = tmp
-// 		l = l.Next
+// 		l = l.Next // this breaks [3, 5] m = 1, n = 2
 // 	}
 // }
 
