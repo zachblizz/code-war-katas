@@ -36,15 +36,28 @@ func printList(head *ListNode) {
 	fmt.Println()
 }
 
-func swapNode(c, n *ListNode) {
-	c.Next = n.Next
-	n = c
+func _reverseBetween2(stack []*ListNode, start, end int) {
+	if start == end {
+		return
+	}
+
+	if start == 0 {
+		stack[start].Next = stack[end]
+		start++
+	}
+
+	tmp := stack[start].Next
+	stack[start].Next = stack[end].Next
+	stack[end].Next = tmp
+	tmp.Next = stack[start]
+
+	_reverseBetween2(stack, start+1, end-1)
 }
 
 func _reverseBetween(stack []*ListNode) {
 	// update stack[0].Next = stack[len(stack)-1]
 	start := 1
-	end := len(stack)-1
+	end := len(stack) - 1
 	stack[0].Next = stack[end]
 
 	for ; start < end; start++ {
@@ -54,48 +67,110 @@ func _reverseBetween(stack []*ListNode) {
 		tmp.Next = stack[start]
 		end--
 	}
-	// if s == nil {
-	// 	returncf4fc4d7238f982253543d0626b3ec7a4afe2243
-	// }
-
-	// tmp := s.Next
-	// swapNode(s, s.Next)
-	// _reverseBetween(tmp, e)
 }
 
-cf4fc4d7238f982253543d0626b3ec7a4afe2243
+func _reverseBetween3(head *ListNode, stack []*ListNode, start, end int) {
+	if end < start {
+		return
+	}
+
+	p := stack[start-1]
+	s := stack[start]
+	pe := stack[end-1]
+	e := stack[end]
+
+	tmp := s.Next
+	s.Next = e.Next
+	e.Next = tmp
+	pe.Next = s
+	p.Next = e
+
+	printList(head)
+
+	_reverseBetween3(head, stack, start+1, end-1)
+}
+
+func _reverseBetweenMine(stack []*ListNode) {
+	s, e := 0, len(stack)-1
+
+	for ; s < e; s++ {
+		st := stack[s]
+		end := stack[e]
+		tmp := end.Val
+
+		end.Val = st.Val
+		st.Val = tmp
+
+		e--
+	}
+}
 
 func reverseBetween(head *ListNode, m, n int) *ListNode {
 	node := head
-	start := false
-	tmp := head
 	stack := []*ListNode{}
+	idx := 1
 
 	for node != nil {
-		if node.Val == m {
-			stack = append(stack, tmp)
-			start = true
-		} else if node.Val == n {
-			start = false
-		} 
-		
-		if (start || node.Val == n) {
+		if idx >= m && idx <= n {
 			stack = append(stack, node)
+		} else if idx == n {
+			break
 		}
 
-		tmp = node
 		node = node.Next
+		idx++
 	}
 
-	_reverseBetween(stack)
+	_reverseBetweenMine(stack)
 
 	return head
 }
 
+// var (
+// 	l *ListNode
+// 	stop bool
+// )
+
+// // it's position not value.......
+// func reverseBetween(head *ListNode, m, n int) *ListNode {
+// 	r := &ListNode{head.Val, head.Next}
+// 	l = &ListNode{head.Val, head.Next}
+// 	stop = false
+
+// 	_rb(r, m, n)
+// 	return head
+// }
+
+// func _rb(r *ListNode, m, n int) {
+// 	if n == 1 {
+// 		return
+// 	}
+
+// 	r = r.Next
+	
+// 	if m > 1 {
+// 		l = l.Next
+// 	}
+
+// 	_rb(r, m-1, n-1)
+
+// 	if l == r || r.Next == l {
+// 		stop = true
+// 	}
+
+// 	if !stop {
+// 		tmp := l.Val
+// 		l.Val = r.Val
+// 		r.Val = tmp
+// 		l = l.Next
+// 	}
+// }
+
 func main() {
 	input := []int{1, 2, 3, 4, 5}
+	// input = []int{3,5}
 	head := createList(input)
-	reverseBetween(head, 2, 5)
+	reverseBetween(head, 2, 4)
 
 	printList(head)
 }
