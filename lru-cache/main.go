@@ -60,6 +60,7 @@ func (l *LRUCache) Put(key int, value int) {
 				remK = k
 			}
 		}
+		fmt.Printf("going to remove %v\n", remK)
 
 		// remove the key from the cache
 		delete(l.cache, remK)
