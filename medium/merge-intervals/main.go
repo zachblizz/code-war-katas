@@ -1,5 +1,7 @@
 package main
 
+// leet code - https://leetcode.com/problems/merge-intervals/
+
 import (
 	"fmt"
 	"sort"
@@ -24,7 +26,7 @@ func helper(intervals, ret [][]int, interval, lastMerged []int, idx int) [][]int
 		if lastMerged[0] > interval[0] {
 			lastMerged[0] = interval[0]
 		}
-		
+
 		if lastMerged[1] < interval[1] {
 			lastMerged[1] = tmp
 		}
@@ -44,8 +46,8 @@ func helper(intervals, ret [][]int, interval, lastMerged []int, idx int) [][]int
 
 func main() {
 	intervals := [][]int{
-		[]int{1,4},
-		[]int{0,1},
+		[]int{1, 4},
+		[]int{0, 1},
 	}
 
 	fmt.Println(merge(intervals))
