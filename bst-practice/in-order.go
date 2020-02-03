@@ -2,19 +2,7 @@ package bst
 
 func iterativeInOrder(root *TreeNode) []int {
 	list := []int{}
-	stack := []*TreeNode{}
-
-	for root != nil || len(stack) > 0 {
-		for root != nil {
-			stack = append(stack, root)
-			list = append(list, root.Val)
-			root = root.Left
-		}
-
-		tmp := stack[len(stack)-1]      // pop head
-		stack = stack[0 : len(stack)-1] // remove head from stack...
-		root = tmp.Right
-	}
+	// TODO
 
 	return list
 }
