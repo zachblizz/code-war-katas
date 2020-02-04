@@ -18,46 +18,46 @@ func Test_merge(t *testing.T) {
 			"first",
 			args{
 				[][]int{
-					[]int{1,4},
-					[]int{0,1},
+					[]int{1, 4},
+					[]int{0, 1},
 				},
 			},
-			[][]int{[]int{0,4}},
+			[][]int{[]int{0, 4}},
 		},
 		{
 			"second",
 			args{
 				[][]int{
-					[]int{1,3},
-					[]int{2,8},
-					[]int{8,10},
-					[]int{10,18},
+					[]int{1, 3},
+					[]int{2, 8},
+					[]int{8, 10},
+					[]int{10, 18},
 				},
 			},
-			[][]int{[]int{1,18}},
+			[][]int{[]int{1, 18}},
 		},
 		{
 			"third",
 			args{
 				[][]int{
-					[]int{1,4},
-					[]int{0,0},
+					[]int{1, 4},
+					[]int{0, 0},
 				},
 			},
-			[][]int{[]int{0,0},[]int{1,4}},
+			[][]int{[]int{0, 0}, []int{1, 4}},
 		},
 		{
 			"fourth",
 			args{
 				[][]int{
-					[]int{2,3},
-					[]int{4,5},
-					[]int{6,7},
-					[]int{8,9},
-					[]int{1,10},
+					[]int{2, 3},
+					[]int{4, 5},
+					[]int{6, 7},
+					[]int{8, 9},
+					[]int{1, 10},
 				},
 			},
-			[][]int{[]int{1,10}},
+			[][]int{[]int{1, 10}},
 		},
 	}
 	for _, tt := range tests {
