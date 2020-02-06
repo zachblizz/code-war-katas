@@ -26,7 +26,7 @@ type Node struct {
 
 // Constructor - creates a new LRUCache
 func Constructor(capacity int, want []int) LRUCache {
-	return LRUCache{capacity, 0, 0, &Node{0, 0, nil, nil}, &Node{0, 0, nil, nil}, []int{}, make(map[int]*Node)}
+	return LRUCache{capacity, 0, 0, nil, nil, []int{}, make(map[int]*Node)}
 }
 
 // Get - gets the key from the cache if preset, -1 if not
@@ -60,33 +60,45 @@ func (l *LRUCache) Put(key int, value int) {
 		// delete(l.cache, l.tail.key)
 	}
 
-	l.printList()
+	printList(l.head)
 }
 
 // set head to tail and visa versa
 func (l *LRUCache) evict(node *Node) {
-	prev := node.prev
-	next := node.next
-	prev.next = next
-	next.prev = prev
+	htmp := l.head
+	l.head.prev = node
+	node.next = l.head
+	l.head.next = nil
+	l.head = node
+
+	delete(l.cache, l.tail.key)
+	l.tail = htmp
 }
 
 func (l *LRUCache) add(node *Node) {
-	next := l.head.next
-	l.head.next = node
-	node.prev = l.head
-	node.next = next
-	next.prev = node
+	if l.head == nil {
+		l.head = node
+		return
+	}
+
+	l.head.prev = node
+	node.next = l.head
+
+	if l.tail == nil {
+		l.tail = l.head
+	}
+
+	l.head = node
 }
 
-func (l *LRUCache) printList() {
-	node := l.head
-
-	for node != nil {
-		fmt.Printf("%v->", node.key)
-		node = node.next
+func printList(node *Node) {
+	if node == nil {
+		fmt.Println()
+		return
 	}
-	fmt.Println()
+
+	fmt.Printf("<-%v->", node.key)
+	printList(node.next)
 }
 
 func setup(ops []string, vals [][]int, want []int) []int {
