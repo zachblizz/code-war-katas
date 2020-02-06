@@ -10,7 +10,8 @@ import (
 
 func intToRoman(num int) string {
 	sym := map[int]string{
-		1: "I", 2: "II", 3: "III", 5: "V", 6: "VI", 7: "VII", 8: "VIII", 10: "X", 50: "L", 100: "C", 500: "D", 1000: "M",
+		1: "I", 2: "II", 3: "III", 5: "V", 6: "VI",
+		7: "VII", 8: "VIII", 10: "X", 50: "L", 100: "C", 500: "D", 1000: "M",
 		4: "IV", 9: "IX", 40: "XL", 90: "XC", 400: "CD", 900: "CM",
 	}
 
@@ -70,6 +71,35 @@ func calculateNumber(r int, sym map[int]string) string {
 	}
 
 	return ret.String()
+}
+
+// better solution yoinked from someone...
+func intToRoman2(num int) string {
+	nums := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	numMap := map[int]string{
+		1:    "I",
+		4:    "IV",
+		5:    "V",
+		9:    "IX",
+		10:   "X",
+		40:   "XL",
+		50:   "L",
+		90:   "XC",
+		100:  "C",
+		400:  "CD",
+		500:  "D",
+		900:  "CM",
+		1000: "M",
+	}
+
+	result := ""
+	for i := range nums {
+		for num >= nums[i] {
+			num -= nums[i]
+			result += numMap[nums[i]]
+		}
+	}
+	return result
 }
 
 func main() {
