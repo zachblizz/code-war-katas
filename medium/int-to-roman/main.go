@@ -92,16 +92,17 @@ func intToRoman2(num int) string {
 		1000: "M",
 	}
 
-	result := ""
+	var result bytes.Buffer
 	for i := range nums {
 		for num >= nums[i] {
 			num -= nums[i]
-			result += numMap[nums[i]]
+			result.WriteString(numMap[nums[i]])
 		}
 	}
-	return result
+	return result.String()
 }
 
 func main() {
-	fmt.Println(intToRoman(1994))
+	fmt.Println(intToRoman(109993))
+	fmt.Println(intToRoman2(109993))
 }
