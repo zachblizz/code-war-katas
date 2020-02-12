@@ -52,8 +52,7 @@ func swapPairs(head *ListNode) *ListNode {
 			nn := n.Next
 
 			if nn != nil && nn.Next != nil {
-				nnn := nn.Next
-				head.Next = nnn
+				head.Next = nn.Next
 			} else {
 				head.Next = nn
 			}
@@ -81,5 +80,3 @@ func main() {
 	head = createList([]int{1, 2, 3, 4, 5})
 	printList(swapPairs(head))
 }
-
-
