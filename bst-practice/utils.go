@@ -37,6 +37,7 @@ func BuildTree([]interface{} input) *TreeNode {
 				tmp.Right = createNode(input[i])
 				break
 			}
+			j++
 		}
 	}
 
