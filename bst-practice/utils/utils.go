@@ -8,23 +8,14 @@ type TreeNode struct {
 }
 
 // BuildTree - builds the tree given the input array
-/* e.g.:
-  [1,nil,2,3]
-
-	1
-	 \
-	  2
-	 /
-   3
-*/
-func BuildTree(input []int, root *TreeNode, i int) {
+func BuildTree(input []int, root TreeNode, i int) *TreeNode {
 	if i < len(input) {
-		tmp := createNode(input[i])
-		root = tmp
+		root = createNode(input[i])
 
 		BuildTree(input, root.Left, 2*i+1)
 		BuildTree(input, root.Right, 2*i+2)
 	}
+	return &root
 }
 
 func createNode(val int) *TreeNode {
@@ -34,7 +25,3 @@ func createNode(val int) *TreeNode {
 
 	return &TreeNode{val, nil, nil}
 }
-
-//func main() {
-//BuildTree([]int{1, -1, 2, 3})
-//}

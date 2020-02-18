@@ -1,13 +1,17 @@
 package main
 
-import "github.com/zachblizz/code-war-katas/utils"
+import (
+	"fmt"
+
+	"github.com/zachblizz/code-war-katas/bst-practice/utils"
+)
 
 func iterativeInOrder(root *utils.TreeNode) []int {
 	list := []int{}
-	stack := []int{}
+	stack := []*utils.TreeNode{}
 
-	for root || len(stack) > 0 {
-		for root {
+	for root != nil || len(stack) > 0 {
+		for root != nil {
 			list = append(list, root.Val)
 			stack = append(stack, root)
 			root = root.Left
@@ -15,7 +19,7 @@ func iterativeInOrder(root *utils.TreeNode) []int {
 
 		tmp := stack[len(stack)-1]
 		stack = stack[0 : len(stack)-1]
-		root = root.Right
+		root = tmp.Right
 	}
 
 	return list
@@ -38,7 +42,6 @@ func _recursiveInOrder(root *utils.TreeNode, list []int) []int {
 }
 
 func main() {
-	root := &utils.TreeNode{}
-	utils.BuildTree([]int{1, -1, 2, 3}, root, 0)
-	recursiveInOrder(root)
+	root := utils.BuildTree([]int{1, 2, 3, 4, 5, 6, 6, 6, 6}, utils.TreeNode{}, 0)
+	fmt.Println(recursiveInOrder(root))
 }
