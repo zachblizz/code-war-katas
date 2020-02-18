@@ -17,7 +17,7 @@ type TreeNode struct {
 	  3
 */
 // BuildTree - builds the tree given the input array
-func BuildTree([]interface{} input) *TreeNode {
+func BuildTree(input []int) *TreeNode {
 	var root TreeNode
 
 	for i := 0; i < len(input); i++ {
@@ -25,8 +25,8 @@ func BuildTree([]interface{} input) *TreeNode {
 		var tmp TreeNode
 
 		// not there yet...
-		while (j <= 2) {
-			switch(j) {
+		for ; j <= 2 && i < len(input); j++ {
+			switch j {
 			case 0:
 				tmp = createNode(input[i])
 				break
@@ -37,7 +37,7 @@ func BuildTree([]interface{} input) *TreeNode {
 				tmp.Right = createNode(input[i])
 				break
 			}
-			j++
+			i++
 		}
 	}
 
@@ -45,6 +45,12 @@ func BuildTree([]interface{} input) *TreeNode {
 }
 
 func createNode(int val) TreeNode {
+	if val == -1 {
+		return nil
+	}
 	return TreeNode{val, nil, nil}
 }
 
+func main() {
+	BuildTree([]int{1, -1, 2, 3})
+}
