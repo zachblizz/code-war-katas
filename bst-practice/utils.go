@@ -41,7 +41,7 @@ func BuildTree(input []int) *TreeNode {
 		}
 	}
 
-	return root
+	return &root
 }
 
 func createNode(int val) TreeNode {
