@@ -1,11 +1,4 @@
-package bst
-
-// TreeNode - the tree node struct...
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+package main
 
 func iterativePreOrder(root *TreeNode) []int {
 	list := []int{}
