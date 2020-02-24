@@ -1,15 +1,10 @@
-package bst
+package main
 
-// TreeNode - the tree node struct...
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+import "github.com/zachblizz/code-war-katas/bst-practice/utils"
 
-func iterativePreOrder(root *TreeNode) []int {
+func iterativePreOrder(root *utils.TreeNode) []int {
 	list := []int{}
-	stack := []*TreeNode{}
+	stack := []*utils.TreeNode{}
 
 	for root != nil || len(stack) > 0 {
 		for root != nil {
@@ -26,11 +21,11 @@ func iterativePreOrder(root *TreeNode) []int {
 	return list
 }
 
-func recursivePreOrder(root *TreeNode) []int {
+func recursivePreOrder(root *utils.TreeNode) []int {
 	return _recursivePreOrder(root, []int{})
 }
 
-func _recursivePreOrder(root *TreeNode, list []int) []int {
+func _recursivePreOrder(root *utils.TreeNode, list []int) []int {
 	if root == nil {
 		return list
 	}

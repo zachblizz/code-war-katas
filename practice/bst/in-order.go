@@ -1,17 +1,35 @@
-package bst
+package main
 
-func iterativeInOrder(root *TreeNode) []int {
+import (
+	"fmt"
+
+	"github.com/zachblizz/code-war-katas/bst-practice/utils"
+)
+
+func iterativeInOrder(root *utils.TreeNode) []int {
 	list := []int{}
-	// TODO
+	stack := []*utils.TreeNode{}
+
+	for root != nil || len(stack) > 0 {
+		for root != nil {
+			list = append(list, root.Val)
+			stack = append(stack, root)
+			root = root.Left
+		}
+
+		tmp := stack[len(stack)-1]
+		stack = stack[0 : len(stack)-1]
+		root = tmp.Right
+	}
 
 	return list
 }
 
-func recursiveInOrder(root *TreeNode) []int {
+func recursiveInOrder(root *utils.TreeNode) []int {
 	return _recursiveInOrder(root, []int{})
 }
 
-func _recursiveInOrder(root *TreeNode, list []int) []int {
+func _recursiveInOrder(root *utils.TreeNode, list []int) []int {
 	if root == nil {
 		return list
 	}
@@ -21,4 +39,9 @@ func _recursiveInOrder(root *TreeNode, list []int) []int {
 	list = _recursiveInOrder(root.Right, list)
 
 	return list
+}
+
+func main() {
+	root := utils.BuildTree([]int{1, 2, 3, 4, 5, 6, 6, 6, 6}, utils.TreeNode{}, 0)
+	fmt.Println(recursiveInOrder(root))
 }
