@@ -25,13 +25,14 @@ func (r *Runner) Run() {
 	for {
 		select {
 		case s := <-r.stop:
+			fmt.Println(s)
 			if s {
 				r.wg.Done()
 				fmt.Println("done...")
+				return
 			}
-		default:
-			time.Sleep(5000)
-			fmt.Println("running...")
 		}
+		time.Sleep(5000)
+		fmt.Println("running...")
 	}
 }
