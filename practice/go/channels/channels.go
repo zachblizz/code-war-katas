@@ -33,7 +33,5 @@ func (r *Runner) Run() {
 
 		time.Sleep(5000)
 		fmt.Println("running...")
-
-		r.wg.Done()
 	}
 }

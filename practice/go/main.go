@@ -16,10 +16,13 @@ func main() {
 
 	runner := channels.NewRunner(stop, wg)
 	fmt.Println("going to call run")
+	wg.Add(1)
 	go runner.Run()
 
-	time.Sleep(50000)
-	stop <- true
+	go func() {
+		time.Sleep(50000)
+		stop <- true
+	}
 
 	wg.Wait()
 	close(stop)
