@@ -1,11 +1,22 @@
 package main
 
-import "github.com/zach-blizz/code-war-katas/practice/go/channels"
+import (
+	"fmt"
+	"time"
+
+	"github.com/zach-blizz/code-war-katas/practice/go/channels"
+
+)
 
 func main() {
-	stop := make(chan bool)
+	stop := make(chan bool, 2)
 	stop <- false
 
-	runner := NewRunner(&stop)
+	runner := channels.NewRunner(stop)
+	fmt.Println("going to call run")
+	go runner.Run()
 
+	time.Sleep(50000)
+	stop <- true
+	close(stop)
 }
