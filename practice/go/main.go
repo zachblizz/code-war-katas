@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"time"
 	"sync"
+	"time"
 
 	"github.com/zach-blizz/code-war-katas/practice/go/channels"
 
@@ -19,8 +19,8 @@ func main() {
 	wg.Add(1)
 	go runner.Run()
 
-	go func(){
-		time.Sleep(50000)
+	go func() {
+		time.Sleep(50 * time.Second)
 		fmt.Println("going to stop now....")
 		stop <- true
 	}()

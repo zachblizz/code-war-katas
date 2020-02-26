@@ -31,8 +31,9 @@ func (r *Runner) Run() {
 				fmt.Println("done...")
 				return
 			}
+		default:
+			time.Sleep(5 * time.Second)
+			fmt.Println("running...")
 		}
-		time.Sleep(5000)
-		fmt.Println("running...")
 	}
 }
