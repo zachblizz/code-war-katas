@@ -9,12 +9,12 @@ import (
 
 // Runner - runner type
 type Runner struct {
-	stop chan bool
+	stop <-chan bool
 	wg   *sync.WaitGroup
 }
 
 // NewRunner - returns a new runner
-func NewRunner(stop chan bool, wg *sync.WaitGroup) *Runner {
+func NewRunner(stop <-chan bool, wg *sync.WaitGroup) *Runner {
 	return &Runner{stop, wg}
 }
 
@@ -22,7 +22,6 @@ func NewRunner(stop chan bool, wg *sync.WaitGroup) *Runner {
 func (r *Runner) Run() {
 	for {
 		fmt.Println("going to start...")
-		r.wg.Add(1)
 		s := <-r.stop
 
 		if s {

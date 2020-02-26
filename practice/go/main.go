@@ -19,10 +19,8 @@ func main() {
 	wg.Add(1)
 	go runner.Run()
 
-	go func() {
-		time.Sleep(50000)
-		stop <- true
-	}
+	time.Sleep(50000)
+	stop <- true
 
 	wg.Wait()
 	close(stop)
