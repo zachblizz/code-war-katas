@@ -20,17 +20,18 @@ func NewRunner(stop <-chan bool, wg *sync.WaitGroup) *Runner {
 
 // Run - runs the stuff...
 func (r *Runner) Run() {
+	fmt.Println("going to start...")
+
 	for {
-		fmt.Println("going to start...")
-		s := <-r.stop
-
-		if s {
-			r.wg.Done()
-			fmt.Println("going to stop...")
-			return
+		select {
+		case s := <-r.stop:
+			if s {
+				r.wg.Done()
+				fmt.Println("done...")
+			}
+		default:
+			time.Sleep(5000)
+			fmt.Println("running...")
 		}
-
-		time.Sleep(5000)
-		fmt.Println("running...")
 	}
 }
